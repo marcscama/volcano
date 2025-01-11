@@ -11,10 +11,11 @@
 </head>
 <body>
     <script type="module">
+        // Importa i moduli da URL specifici (ESM)
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
         import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/loaders/GLTFLoader.js';
 
-        // Impostazioni di base
+        // Configurazione della scena
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
@@ -26,13 +27,13 @@
         light.position.set(1, 1, 1).normalize();
         scene.add(light);
 
-        // Carica il file GLTF
+        // Carica il modello GLTF
         const loader = new GLTFLoader();
         loader.load(
             './Campi-2025.gltf', // Percorso relativo al file GLTF
             (gltf) => {
                 scene.add(gltf.scene);
-                console.log('Modello caricato con successo!');
+                console.log('Modello caricato correttamente!');
             },
             undefined,
             (error) => {
