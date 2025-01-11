@@ -22,7 +22,7 @@
         import * as THREE from 'three';
         import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-        // Configurazione della scena
+        // Configurazione scena, camera e renderer
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
@@ -37,7 +37,7 @@
         // Carica il modello GLTF
         const loader = new GLTFLoader();
         loader.load(
-            './Campi-2025.gltf', // Percorso relativo al file GLTF
+            './Campi-2025.gltf', // Usa un percorso relativo per GitHub Pages
             (gltf) => {
                 scene.add(gltf.scene);
                 console.log('Modello caricato correttamente!');
@@ -48,10 +48,10 @@
             }
         );
 
-        // Posizionare la camera
+        // Posiziona la camera
         camera.position.z = 5;
 
-        // Animazione
+        // Funzione di animazione
         function animate() {
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
