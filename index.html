@@ -11,40 +11,41 @@
 </head>
 <body>
     <script type="module">
-        // Importa i moduli da URL specifici (ESM)
         import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js';
         import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/loaders/GLTFLoader.js';
 
-        // Configurazione della scena
+        // Configurazione scena, camera e renderer
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
-        // Aggiungi una luce
+        // Aggiungi una luce direzionale
         const light = new THREE.DirectionalLight(0xffffff, 1);
         light.position.set(1, 1, 1).normalize();
         scene.add(light);
 
-        // Carica il modello GLTF
+        // Caricamento del modello GLTF
         const loader = new GLTFLoader();
         loader.load(
-            './Campi-2025.gltf', // Percorso relativo al file GLTF
+            './Campi-2025.gltf', // Percorso relativo
             (gltf) => {
+                console.log('Modello caricato:', gltf);
                 scene.add(gltf.scene);
-                console.log('Modello caricato correttamente!');
             },
-            undefined,
+            (xhr) => {
+                console.log(`Caricamento: ${(xhr.loaded / xhr.total * 100).toFixed(2)}% completato`);
+            },
             (error) => {
                 console.error('Errore durante il caricamento del modello:', error);
             }
         );
 
         // Posizionare la camera
-        camera.position.z = 5;
+        camera.position.set(0, 2, 10);
 
-        // Animazione
+        // Funzione di animazione
         function animate() {
             requestAnimationFrame(animate);
             renderer.render(scene, camera);
